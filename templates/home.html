@@ -1,0 +1,10 @@
+$def with (data)
+$for view in data['list']:
+        <div class="panel">
+            <h5>$view['user']</h5>
+            <p>$view['text']</p>
+            <ul class="button-group">
+                <li><a class="button">comment</a></li>
+                <li><a class="button">like</a></li>
+            </ul>
+        </div>
