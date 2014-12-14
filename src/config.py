@@ -16,7 +16,7 @@ web.config.smtp_starttls = True
 
 # #
 # db
-db = web.database(dbn="mysql", db="redicule", user="root", pw="123", host="127.0.0.1")
+mysql = web.database(dbn="mysql", db="redicule", user="root", pw="123", host="127.0.0.1")
 
 # #
 # host

@@ -1,4 +1,4 @@
-CREATE TABLE `db_users` (
+CREATE TABLE `db_user` (
   `id` int(11) NOT NULL auto_increment,
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
