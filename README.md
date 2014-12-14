@@ -11,6 +11,6 @@ we can unit each other when the company is intolerable,fight for ourselves
 1.  mysql 
 2.  python
 3.  web.py
-4.  angular js
+4.  foundation js
 
 ### to be continued
