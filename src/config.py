@@ -24,4 +24,4 @@ host = '42.96.188.208'
 
 ##
 # template
-render = web.template.render('templates/', cache=False, base="layout")
+render = web.template.render('../templates/', cache=False, base="layout")

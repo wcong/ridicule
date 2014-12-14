@@ -30,10 +30,13 @@ web.config.debug = True
 
 
 def login_hook(handle):
+    if web.ctx.get("fullpath") in ['/login', '/register', '/invite']:
+        return
     log_user = web.cookies().get("login")
     last_visit_time = web.cookies().get("last_visit_time")
-    if not log_user or not last_visit_time:
+    if log_user is None or  last_visit_time is None :
         web.seeother("/login")
+        return
     last_visit_time = util.decode_string(last_visit_time)
     last_visit_time = int(last_visit_time)
     now = int(datetime.datetime.now().time())
