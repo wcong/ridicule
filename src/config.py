@@ -18,6 +18,10 @@ web.config.smtp_starttls = True
 # db
 db = web.database(dbn="mysql", db="redicule", user="root", pw="123", host="127.0.0.1")
 
-##
+# #
 # host
 host = '42.96.188.208'
+
+##
+# template
+render = web.template.render('templates/', cache=False, base="layout")
