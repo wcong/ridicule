@@ -2,31 +2,43 @@ $def with (content)
 <html>
 <head>
     <title>ridicule</title>
-    <link rel="stylesheet" href="static/css/foundation.css">
-    <script src="static/js/vendor/modernizr.js"></script>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="/static/css/foundation.css">
+    <script src="/static/js/vendor/modernizr.js"></script>
 </head>
 <body>
-    <div class="off-canvas-wrap" data-offcanvas>
-      <div class="inner-wrap">
-        <a class="left-off-canvas-toggle" href="#" >Menu</a>
-        <!-- Off Canvas Menu -->
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+        <nav class="tab-bar">
+            <section class="left-small">
+                <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+            </section>
+
+            <section class="right tab-bar-section">
+                <h1 class="title">ridicule</h1>
+            </section>
+        </nav>
+
         <aside class="left-off-canvas-menu">
-            <!-- whatever you want goes here -->
-            <ul>
-              <li><a href="#">Item 1</a></li>
-            ...
+            <ul class="off-canvas-list">
+                <li><label>Foundation</label></li>
+                <li><a href="#">The Psychohistorians</a></li>
+                <li><a href="#">...</a></li>
             </ul>
         </aside>
-        <!-- main content goes here -->
-        <p>Set in the year 0 F.E. ("Foundation Era"), The Psychohistorians opens on Trantor, the capital of the 12,000-year-old Galactic Empire. Though the empire appears stable and powerful, it is slowly decaying in ways that parallel the decline of the Western Roman Empire. Hari Seldon, a mathematician and psychologist, has developed psychohistory, a new field of science and psychology that equates all possibilities in large societies to mathematics, allowing for the prediction of future events.</p>
-      <!-- close the off-canvas menu -->
-      <a class="exit-off-canvas"></a>
-      </div>
+        <section class="main-section">
+            $:content
+        </section>
+        <a class="exit-off-canvas"></a>
     </div>
-$:content
-<script src="static/js/vendor/jquery.js"></script>
-<script src="static/js/vendor/fastclick.js"></script>
-<script src="static/js/foundation.min.js"></script>
+</div>
+<script src="/static/js/vendor/jquery.js"></script>
+<script src="/static/js/vendor/fastclick.js"></script>
+<script src="/static/js/foundation.min.js"></script>
 <script>
     $$(document).foundation();
 </script>

@@ -27,8 +27,9 @@ class Index:
         register_link_meta = util.make_register_link(email)
         register_link = 'http://' + config.host + '/register?email=' + register_link_meta[0] + '&sign=' + \
                         register_link_meta[1]
-        message = '<h1>click the follow links</h2><p>' + register_link + '</p>'
-        web.sendmail('redicule@163.com', email, 'register', message)
+        message = '<html xmlns=\'http://www.w3.org/1999/xhtml\'><body><h1>click the follow links</h1><a href="' + register_link + '">click to register</a></body></html>'
+        web.sendmail('redicule@163.com', email, 'register', message,
+                     headers={'Content-Type': 'text/html;charset=utf-8'})
         result = dict()
         result['success'] = True
         return json.dumps(result)

@@ -13,7 +13,7 @@ urls = (
 )
 
 
-class Index:
+class Index():
     def GET(self):
         return config.render.login()
 
