@@ -13,7 +13,7 @@ this is util function of web app
 
 
 def make_register_link(email):
-    return base64.encode(email), base64.encode(email + '' + str(datetime.datetime.now().time()))
+    return encode_string(email), encode_string(email + '' + str(datetime.datetime.now().time()))
 
 
 def get_user_email():
@@ -32,6 +32,7 @@ def encode_string(string):
 
 def decode_string(string):
     return base64.decodestring(string)
+
 
 def make_create_time():
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")

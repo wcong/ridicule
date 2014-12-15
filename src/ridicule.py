@@ -7,8 +7,8 @@ import util
 
 
 urls = (
-    '/', 'Index'
-         '/write', 'Write'
+    '/', 'Index',
+    '/write', 'Write'
 )
 
 
@@ -25,9 +25,9 @@ class Write:
         email = util.get_user_email()
         create_time = util.make_create_time()
         user_id = util.get_user_id_by_email(email)
-        redicule = web.input().get("redicule")
-        sql = 'insert into db_redicule(create_time,user_id,content)values("' + create_time + '",' + user_id + ',"' + redicule + '")'
+        ridicule = web.input().get("ridicule")
+        sql = 'insert into db_ridicule(create_time,user_id,content)values("' + create_time + '",' + user_id + ',"' + ridicule + '")'
         config.mysql.query(sql)
 
 
-app_redicule = web.application(urls, locals())
+app_ridicule = web.application(urls, locals())

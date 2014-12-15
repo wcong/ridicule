@@ -1,4 +1,4 @@
-### redicule
+### ridicule
 why would I do this ?
 
 of course I am tired of my company.

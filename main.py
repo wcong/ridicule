@@ -23,7 +23,7 @@ urls = (
     '/setting', setting.app_setting,
     '/invite', invite.app_invite,
     '/register', register.app_register,
-    '/redicule',redicule.app_redicule
+    '/ridicule', ridicule.app_ridicule
 )
 
 web.config.debug = True
@@ -34,7 +34,7 @@ def login_hook(handle):
         return
     log_user = web.cookies().get("login")
     last_visit_time = web.cookies().get("last_visit_time")
-    if log_user is None or  last_visit_time is None :
+    if log_user is None or last_visit_time is None:
         web.seeother("/login")
         return
     last_visit_time = util.decode_string(last_visit_time)

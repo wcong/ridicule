@@ -35,7 +35,7 @@ CREATE TABLE `db_position` (
   UNIQUE KEY `company_id_name` (`company_id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='职位表';
 
-CREATE TABLE `db_redicule` (
+CREATE TABLE `db_ridicule` (
   `id` int(11) NOT NULL auto_increment,
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
@@ -49,7 +49,7 @@ CREATE TABLE `db_comment` (
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL COMMENT '评论人id',
-  `redicule_id` int(11)  NOT NULL  comment '评论的吐槽id',
+  `ridicule_id` int(11)  NOT NULL  comment '评论的吐槽id',
   `content` varchar(50) COMMENT '评论内容',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='评论表';
@@ -59,7 +59,7 @@ CREATE TABLE `db_like` (
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL COMMENT 'like人id',
-  `redicule_id` int(11)  NOT NULL  comment 'like的吐槽id',
+  `ridicule_id` int(11)  NOT NULL  comment 'like的吐槽id',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='like表';
 

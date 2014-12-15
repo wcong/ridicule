@@ -18,14 +18,14 @@ class Index:
         email = util.get_user_email()
         user_id = util.get_user_id_by_email(email)
         user_id_list = Index.get_readable_user_id(user_id)
-        redicule_list = Index.get_redicule_by_user_id(user_id_list)
+        ridicule_list = Index.get_ridicule_by_user_id(user_id_list)
         data = dict()
-        data['redicule_list'] = redicule_list
+        data['ridicule_list'] = ridicule_list
         return config.render.home(data)
 
     @staticmethod
-    def get_redicule_by_user_id(user_id_list):
-        sql = 'select id,user_id,content from db_redicule where user_id in (' + ','.join(
+    def get_ridicule_by_user_id(user_id_list):
+        sql = 'select id,user_id,content from db_ridicule where user_id in (' + ','.join(
             user_id_list) + ') order by create_time desc'
         data = list(config.mysql.query(sql))
         return data
