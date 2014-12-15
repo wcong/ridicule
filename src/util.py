@@ -36,3 +36,8 @@ def decode_string(string):
 
 def make_create_time():
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+def add_company_by_email(email):
+    #TODO
+    return ''

@@ -3,7 +3,7 @@ CREATE TABLE `db_user` (
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `email` varchar(50) NOT NULL COMMENT '注册邮箱',
-  `password` varchar(150)  NOT NULL  comment '密码加密',
+  `password` varchar(150)  comment '密码加密',
   `nickname` varchar(50) COMMENT '昵称',
   `is_nickname` tinyint(1) NOT NULL default 0 comment '是否昵称',
   `company_id` int(11) NOT NULL comment '公司id',
