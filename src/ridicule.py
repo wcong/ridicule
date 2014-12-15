@@ -14,12 +14,12 @@ urls = (
 
 class Index:
     def GET(self):
-        return config.render.redicule()
+        return config.render.ridicule()
 
 
 class Write:
     def GET(self):
-        return config.render.write_redicule()
+        return config.render.write_ridicule()
 
     def POST(self):
         email = util.get_user_email()
