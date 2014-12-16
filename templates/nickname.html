@@ -1,0 +1,16 @@
+$def with (data)
+<form method="POST">
+    <fieldset>
+        <legend>nickname</legend>
+        <label>nickname
+            <input name="nickname" value="$data['user']['nickname']">
+        </label>
+        <div>
+        <input id="checkbox" type="checkbox" name="is_nickname"
+        $if data['user']['is_nickname'] == 1:
+            checked
+        ><label for="checkbox">is_nick_name</label>
+        </div>
+        <button type="submit">Submit</button>
+    </fieldset>
+</form>

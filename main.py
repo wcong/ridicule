@@ -2,7 +2,6 @@
 # encoding=utf8
 
 import sys
-import datetime
 
 import web
 
@@ -38,13 +37,14 @@ def login_hook(handle):
     log_user = web.cookies().get("email")
     last_visit_time = web.cookies().get("last_visit_time")
     if log_user is None or last_visit_time is None:
-        raise web.seeother("/invite/")
+        raise web.seeother("/login/")
     last_visit_time = util.decode_string(last_visit_time)
     last_visit_time = int(last_visit_time)
     now = util.make_time_stamp()
     time_interval = now - last_visit_time
     if time_interval > config.log_time_interval:
-        raise web.seeother("/invite/")
+        raise web.seeother("/login/")
+    web.setcookie('last_visit_time', util.encode_string(str(util.make_time_stamp())), path='/')
     return handle()
 
 

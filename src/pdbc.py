@@ -71,7 +71,12 @@ class User:
 
     @staticmethod
     def update_by_id(user_id, field, value):
-        sql = 'update ' + User.db_name + ' set ' + field + ' = "' + value + '" where id=' + user_id
+        sql = 'update ' + User.db_name + ' set ' + field + ' = "' + value + '" where id=' + str(user_id)
+        db.query(sql)
+
+    @staticmethod
+    def update_list_by_id(user_id, set_list):
+        sql = 'update ' + User.db_name + ' set ' + ','.join(set_list) + ' where id=' + str(user_id)
         db.query(sql)
 
     @staticmethod
@@ -82,5 +87,42 @@ class User:
             return True
         else:
             return False
+
+    @staticmethod
+    def select_all_by_id(user_id):
+        sql = 'select * from ' + User.db_name + ' where id=' + str(user_id)
+        return list(db.query(sql))[0]
+
+
+class Ridicule:
+    db_name = 'db_ridicule'
+
+    @staticmethod
+    def select_by_user_id(user_id):
+        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where user_id=' + str(user_id)
+        return list(db.query(sql))
+
+    @staticmethod
+    def select_by_id(ridicule_id):
+        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where id=' + str(ridicule_id)
+        return list(db.query(sql))[0]
+
+
+class Like:
+    db_name = 'db_like'
+
+    @staticmethod
+    def select_by_ridicule_id(ridicule_id):
+        sql = 'select id,user_id from ' + Like.db_name + ' where ridicule_id=' + str(ridicule_id)
+        return list(db.query(sql))
+
+
+class Comment:
+    db_name = 'db_comment'
+
+    @staticmethod
+    def select_by_ridicule_id(ridicule_id):
+        sql = 'select id,user_id,content from ' + Comment.db_name + ' where ridicule_id=' + str(ridicule_id)
+        return list(db.query(sql))
 
 

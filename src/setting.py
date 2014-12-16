@@ -2,8 +2,9 @@
 __author__ = 'wcong'
 
 import web
-
+import util
 import config
+import pdbc
 
 
 urls = (
@@ -13,7 +14,12 @@ urls = (
 
 class Index:
     def GET(self):
-        return config.render.setting()
+        email = util.get_user_email()
+        user_id = util.get_user_id_by_email(email)
+        user = pdbc.User.select_all_by_id(user_id)
+        data = dict()
+        data['user'] = user
+        return config.render.setting(data)
 
 
 app_setting = web.application(urls, locals())
