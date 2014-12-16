@@ -23,7 +23,10 @@ urls = (
     '/setting', setting.app_setting,
     '/invite', invite.app_invite,
     '/register', register.app_register,
-    '/ridicule', ridicule.app_ridicule
+    '/ridicule', ridicule.app_ridicule,
+    '/my', my.app_my,
+    '/friends', friends.app_friends,
+    '/nickname', nickname.app_nickname
 )
 
 web.config.debug = True
