@@ -1,6 +1,7 @@
 __author__ = 'wcong'
 import base64
 import datetime
+import time
 
 import web
 
@@ -13,7 +14,11 @@ this is util function of web app
 
 
 def make_register_link(email):
-    return encode_string(email), encode_string(email + '' + str(datetime.datetime.now().time()))
+    return encode_string(email), encode_string(email + str(make_time_stamp()))
+
+
+def make_time_stamp():
+    return int(time.mktime(datetime.datetime.now().timetuple()))
 
 
 def get_user_email():

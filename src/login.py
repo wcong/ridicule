@@ -24,8 +24,9 @@ class Index():
             password) + '"'
         result = list(config.mysql.query(sql))
         if len(result) > 0:
-            web.setcookie("email", util.decode_string(email))
-        web.seeother('/home')
+            web.setcookie("email", util.encode_string(email))
+            web.setcookie("last_visit_time", util.encode_string(str(util.make_time_stamp())))
+        web.seeother('../home/')
 
 
 app_login = web.application(urls, locals())
