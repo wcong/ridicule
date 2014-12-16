@@ -20,7 +20,7 @@ mysql = web.database(dbn="mysql", db="ridicule", user="root", pw="123", host="12
 
 # #
 # host
-host = '42.96.188.208'
+host = '42.96.188.208:8080'
 
 # #
 # template

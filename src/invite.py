@@ -41,16 +41,16 @@ class Index:
     def select_or_add_email(email, check_sign):
         user_id = pdbc.User.select_id_by_email(email)
         if user_id is not None:
-            pdbc.User.update_by_id(user_id, 'check_sign', check_sign)
-            return user_id
+            pdbc.User.update_by_id(str(user_id), 'check_sign', check_sign)
+            return 
         company_email = util.extract_company_from_email(email)
         company_id = pdbc.Company.select_id_by_email(company_email)
         if company_id is None:
             pdbc.Company.insert_by_email(company_email)
             company_id = pdbc.Company.select_id_by_email(company_email)
-            pdbc.Position.init_company(company_id)
-        position_id = pdbc.Position.select_id_by_company(company_id)
-        pdbc.User.init_user(email, check_sign, company_id, position_id)
+            pdbc.Position.init_company(str(company_id))
+        position_id = pdbc.Position.select_id_by_company(str(company_id))
+        pdbc.User.init_user(email, check_sign, str(company_id),str(position_id))
 
 
 app_invite = web.application(urls, locals())
