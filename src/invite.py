@@ -8,6 +8,7 @@ import web
 import util
 
 import config
+import pdbc
 
 
 urls = (
@@ -28,6 +29,7 @@ class Index:
         register_link_meta = util.make_register_link(email)
         register_link = 'http://' + config.host + '/register?email=' + register_link_meta[0] + '&sign=' + \
                         register_link_meta[1]
+        Index.select_or_add_email(email, register_link_meta[1])
         message = '<html xmlns=\'http://www.w3.org/1999/xhtml\'><body><h1>click the follow links</h1><a href="' + register_link + '">click to register</a></body></html>'
         web.sendmail('redicule@163.com', email, 'register', message,
                      headers={'Content-Type': 'text/html;charset=utf-8'})
@@ -36,12 +38,19 @@ class Index:
         return json.dumps(result)
 
     @staticmethod
-    def select_or_add_email(email):
-        sql = 'select id from db_user where email = "' + email + '"'
-        data = list(config.mysql.query(sql))
-        if len(data) > 0:
-            return data[0]['id']
-        sql = 'insert into db_user(create_time,email)'
+    def select_or_add_email(email, check_sign):
+        user_id = pdbc.User.select_id_by_email(email)
+        if user_id is not None:
+            pdbc.User.update_by_id(user_id, 'check_sign', check_sign)
+            return user_id
+        company_email = util.extract_company_from_email(email)
+        company_id = pdbc.Company.select_id_by_email(company_email)
+        if company_id is None:
+            pdbc.Company.insert_by_email(company_email)
+            company_id = pdbc.Company.select_id_by_email(company_email)
+            pdbc.Position.init_company(company_id)
+        position_id = pdbc.Position.select_id_by_company(company_id)
+        pdbc.User.init_user(email, check_sign, company_id, position_id)
 
 
 app_invite = web.application(urls, locals())

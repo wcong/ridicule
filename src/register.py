@@ -7,6 +7,7 @@ import web
 
 import config
 import util
+import pdbc
 
 
 urls = (
@@ -20,7 +21,7 @@ class Index:
         email = util.decode_string(input.get("email"))
         sign = int(util.decode_string(input.get("sign")).replace(email, ''))
         now_time = int(datetime.datetime.now().time())
-        if (now_time - sign) > config.log_time_interval:
+        if (now_time - sign) > config.log_time_interval or not pdbc.User.is_check_sign_same(email, sign):
             web.seeother("/invite")
             return
         data = dict()

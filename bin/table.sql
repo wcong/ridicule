@@ -21,8 +21,9 @@ CREATE TABLE `db_company` (
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `name` varchar(50) NOT NULL COMMENT '公司名称',
+  `email` varchar(50) NOT NULL COMMENT '公司邮箱后缀',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `name` (`name`)
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公司表';
 
 CREATE TABLE `db_position` (
@@ -30,7 +31,7 @@ CREATE TABLE `db_position` (
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `company_id` int(11) NOT NULL COMMENT '公司id',
-  `name` varchar(50)  NOT NULL  comment '职位',
+  `name` varchar(50)  NOT NULL default 'public' comment '职位',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `company_id_name` (`company_id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='职位表';
