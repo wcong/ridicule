@@ -83,7 +83,7 @@ class User:
     def is_check_sign_same(email, check_sign):
         sql = 'select count(*) from ' + User.db_name + ' where is_delete = 0 and  email="' + email + '" and check_sign ="' + check_sign + '"'
         data = list(db.query(sql))
-        if len(data) > 0:
+        if data[0]['count(*)'] > 0:
             return True
         else:
             return False
@@ -97,7 +97,7 @@ class User:
     def select_login_user(email, password):
         sql = 'select count(*) from db_user where email ="' + email + '" and password="' + util.encode_string(
             password) + '"'
-        return list(db.query(sql))
+        return list(db.query(sql))[0]['count(*)']
 
     @staticmethod
     def update_password_by_email(email, password):

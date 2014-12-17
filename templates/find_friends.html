@@ -1,7 +1,7 @@
 $def with (data)
 $for find in data['find_list']:
     <div class="panel">
-        <p>$find['email']</p>
+        <p>$data['user_map'][str(find['id'])]</p>
         <button class="button add_friend" user_id="$find['id']">add</button>
     </div>
 <script src="/static/js/app/find_friend.js"></script>

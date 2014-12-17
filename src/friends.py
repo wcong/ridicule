@@ -23,13 +23,18 @@ class Old:
         email = util.get_user_email()
         user_id = pdbc.User.select_id_by_email(email)
         friend_list = pdbc.Friend.select_by_user_id(user_id)
+        user_id_list = list()
+        for friend in friend_list:
+            user_id_list.append(str(friend['related_user_id']))
+        user_map = pdbc.User.get_user_map_by_user_id(user_id_list)
         data = dict()
         data['friend_list'] = friend_list
+        data['user_map'] = user_map
         return config.render.old_friends(data)
 
     def POST(self):
         email = util.get_user_email()
-        user_id = pdbc.User.select_id_by_email(email)
+        # user_id = pdbc.User.select_id_by_email(email)
         is_open = web.input().get("is_open")
         friend_id = web.input().get("id")
         if is_open == 'on':
@@ -50,8 +55,13 @@ class Find:
             user_id_list.append(str(friend['main_user_id']))
         user_id_list.append(str(user_id))
         find_list = pdbc.User.select_by_company_id(user['company_id'], user_id_list)
+        user_id_list = list()
+        for friend in find_list:
+            user_id_list.append(str(friend['id']))
+        user_map = pdbc.User.get_user_map_by_user_id(user_id_list)
         data = dict()
         data['find_list'] = find_list
+        data['user_map'] = user_map
         return config.render.find_friends(data)
 
     def POST(self):

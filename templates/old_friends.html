@@ -1,7 +1,7 @@
 $def with (data)
 $for friend in data['friend_list']:
     <div class="panel">
-        <p>$friend['related_user_id']</p>
+        <p>$data['user_map'][str(friend['related_user_id'])]</p>
 
         <div class="switch radius">
             <input  friend_id = "$friend['id']"
