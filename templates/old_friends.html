@@ -1,0 +1,15 @@
+$def with (data)
+$for friend in data['friend_list']:
+    <div class="panel">
+        <p>$friend['related_user_id']</p>
+
+        <div class="switch radius">
+            <input  friend_id = "$friend['id']"
+                    class = "read_open" id="is_open"
+                    type="checkbox" name="is_open"
+            $if friend['is_open'] == 1:
+                checked
+            >
+            <label for="is_open"></label>
+        </div>
+    </div>

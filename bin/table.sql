@@ -70,7 +70,7 @@ CREATE TABLE `db_like` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='like表';
 
-CREATE TABLE `db_` (
+CREATE TABLE `db_friend` (
   `id` int(11) NOT NULL auto_increment,
   `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,

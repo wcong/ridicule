@@ -97,12 +97,20 @@ class User:
     def select_login_user(email, password):
         sql = 'select count(*) from db_user where email ="' + email + '" and password="' + util.encode_string(
             password) + '"'
-        return list(config.mysql.query(sql))
+        return list(db.query(sql))
 
     @staticmethod
     def update_password_by_email(email, password):
         sql = 'update db_user set password="' + util.encode_string(password) + '" where email ="' + email + '"'
-        config.mysql.query(sql)
+        db.query(sql)
+
+    @staticmethod
+    def select_by_company_id(company_id, user_id_list):
+        sql = 'select id,email,nickname,from ' \
+              + User.db_name + \
+              ' where is_delete =0 and company_id=' + str(company_id) + \
+              ' and id not in (' + ','.join(user_id_list) + ')'
+        return list(db.query(sql))
 
 
 class Ridicule:
@@ -162,9 +170,29 @@ class Friend:
         return list(db.query(sql))
 
     @staticmethod
+    def select_user_id_by_user_id(user_id):
+        sql = 'select related_user_id from ' + Friend.db_name + ' where id_delete = 0 and main_user_id=' + str(user_id)
+        return list(db.query(sql))
+
+    @staticmethod
     def select_open_friends_by_user_id(user_id):
         sql = 'select related_user_id from db_relationship where id_delete = 0 and main_user_id=' + str(
             user_id) + ' and is_open =1'
         return list(config.mysql.query(sql))
+
+    @staticmethod
+    def insert(main_id, add_id):
+        sql = 'insert into ' + Friend.db_name + \
+              '(create_time,main_user_id,related_user_id)' \
+              'values' \
+              '("' + util.make_create_time() + '",' + str(main_id) + ',' + add_id + ')'
+        db.query(sql)
+
+    @staticmethod
+    def update_is_open(friend_id, is_open):
+        sql = 'update ' + Friend.db_name + \
+              ' set is_open=' + str(is_open) + \
+              ' where id = ' + str(friend_id)
+        db.query(sql)
 
 
