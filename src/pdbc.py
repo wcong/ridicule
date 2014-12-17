@@ -193,6 +193,11 @@ class Friend:
         return list(db.query(sql))
 
     @staticmethod
+    def select_main_user_id_by_user_id(user_id):
+        sql = 'select main_user_id from ' + Friend.db_name + ' where is_delete = 0 and related_user_id=' + str(user_id)
+        return list(db.query(sql))
+
+    @staticmethod
     def select_open_friends_by_user_id(user_id):
         sql = 'select related_user_id from ' + Friend.db_name + ' where is_delete = 0 and main_user_id=' + str(
             user_id) + ' and is_open =1'
@@ -203,7 +208,7 @@ class Friend:
         sql = 'insert into ' + Friend.db_name + \
               '(create_time,main_user_id,related_user_id)' \
               'values' \
-              '("' + util.make_create_time() + '",' + str(main_id) + ',' + add_id + ')'
+              '("' + util.make_create_time() + '",' + str(main_id) + ',' + str(add_id) + ')'
         db.query(sql)
 
     @staticmethod

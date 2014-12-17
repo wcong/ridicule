@@ -44,10 +44,10 @@ class Find:
         email = util.get_user_email()
         user_id = pdbc.User.select_id_by_email(email)
         user = pdbc.User.select_all_by_id(user_id)
-        friend_id_list = pdbc.Friend.select_user_id_by_user_id(user_id)
+        friend_id_list = pdbc.Friend.select_main_user_id_by_user_id(user_id)
         user_id_list = list()
         for friend in friend_id_list:
-            user_id_list.append(str(friend['related_user_id']))
+            user_id_list.append(str(friend['main_user_id']))
         user_id_list.append(str(user_id))
         find_list = pdbc.User.select_by_company_id(user['company_id'], user_id_list)
         data = dict()
@@ -58,7 +58,7 @@ class Find:
         email = util.get_user_email()
         user_id = pdbc.User.select_id_by_email(email)
         add_user_id = web.input().get("user_id")
-        pdbc.Friend.insert(user_id, add_user_id)
+        pdbc.Friend.insert(add_user_id, user_id)
         web.seeother('./old')
 
 
