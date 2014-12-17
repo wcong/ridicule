@@ -2,9 +2,7 @@ __author__ = 'wcong'
 import base64
 import datetime
 import time
-
 import web
-
 import config
 
 
@@ -23,12 +21,6 @@ def make_time_stamp():
 
 def get_user_email():
     return decode_string(web.cookies().get("email"))
-
-
-def get_user_id_by_email(email):
-    sql = 'select id from db_user where email = "' + email + '"'
-    data = list(config.mysql.query(sql))
-    return data[0]['id']
 
 
 def encode_string(string):

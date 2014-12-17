@@ -14,7 +14,7 @@ urls = (
 class Index:
     def GET(self):
         email = util.get_user_email()
-        user_id = util.get_user_id_by_email(email)
+        user_id = pdbc.User.select_id_by_email(email)
         ridicule_list = pdbc.Ridicule.select_by_user_id(user_id)
         data = dict()
         data['list'] = ridicule_list

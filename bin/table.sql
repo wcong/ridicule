@@ -1,5 +1,6 @@
 CREATE TABLE `db_user` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `email` varchar(50) NOT NULL COMMENT '注册邮箱',
@@ -18,6 +19,7 @@ CREATE TABLE `db_user` (
 
 CREATE TABLE `db_company` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `name` varchar(50) NOT NULL COMMENT '公司名称',
@@ -28,6 +30,7 @@ CREATE TABLE `db_company` (
 
 CREATE TABLE `db_position` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `company_id` int(11) NOT NULL COMMENT '公司id',
@@ -38,6 +41,7 @@ CREATE TABLE `db_position` (
 
 CREATE TABLE `db_ridicule` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL COMMENT '吐槽人id',
@@ -47,6 +51,7 @@ CREATE TABLE `db_ridicule` (
 
 CREATE TABLE `db_comment` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL COMMENT '评论人id',
@@ -57,6 +62,7 @@ CREATE TABLE `db_comment` (
 
 CREATE TABLE `db_like` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `user_id` int(11) NOT NULL COMMENT 'like人id',
@@ -64,13 +70,14 @@ CREATE TABLE `db_like` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='like表';
 
-CREATE TABLE `db_relationship` (
+CREATE TABLE `db_` (
   `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   `main_user_id` int(11) NOT NULL COMMENT '当事人id',
   `related_user_id` int(11)  NOT NULL  comment '关系人id',
-  `is_readable` tinyint(1) not null default 0 comment '是否能看关系人吐槽',
+  `is_open` tinyint(1) not null default 0 comment '是否能看关系人吐槽',
   PRIMARY KEY  (`id`),
   UNIQUE KEY `relationship` (`main_user_id`,`related_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户关系表';

@@ -33,12 +33,9 @@ class Write:
 
     def POST(self):
         email = util.get_user_email()
-        create_time = util.make_create_time()
-        user_id = util.get_user_id_by_email(email)
+        user_id = pdbc.User.select_id_by_email(email)
         ridicule = web.input().get("ridicule")
-        sql = 'insert into db_ridicule(create_time,user_id,content)values("' + create_time + '",' + str(
-            user_id) + ',"' + ridicule + '")'
-        config.mysql.query(sql)
+        pdbc.Ridicule.insert(user_id, ridicule)
         web.seeother('../my/')
 
 

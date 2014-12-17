@@ -25,7 +25,7 @@ class Company:
 
     @staticmethod
     def select_id_by_email(email):
-        sql = 'select id from ' + Company.db_name + ' where email = "' + email + '"'
+        sql = 'select id from ' + Company.db_name + ' where id_delete = 0 and  email = "' + email + '"'
         data = list(db.query(sql))
         if len(data) > 0:
             return data[0]['id']
@@ -44,7 +44,7 @@ class Position:
 
     @staticmethod
     def select_id_by_company(company_id, name='public'):
-        sql = 'select id from ' + Position.db_name + ' where company_id=' + company_id + ' and name = "' + name + '"'
+        sql = 'select id from ' + Position.db_name + ' where id_delete = 0 and  company_id=' + company_id + ' and name = "' + name + '"'
         data = list(db.query(sql))
         if len(data) > 0:
             return data[0]['id']
@@ -64,7 +64,7 @@ class User:
 
     @staticmethod
     def select_id_by_email(email):
-        sql = 'select id from ' + User.db_name + ' where email = "' + email + '"'
+        sql = 'select id from ' + User.db_name + ' where id_delete = 0 and  email = "' + email + '"'
         data = list(db.query(sql))
         if len(data) > 0:
             return data[0]['id']
@@ -81,7 +81,7 @@ class User:
 
     @staticmethod
     def is_check_sign_same(email, check_sign):
-        sql = 'select count(*) from ' + User.db_name + ' where email="' + email + '" and check_sign ="' + check_sign + '"'
+        sql = 'select count(*) from ' + User.db_name + ' where id_delete = 0 and  email="' + email + '" and check_sign ="' + check_sign + '"'
         data = list(db.query(sql))
         if len(data) > 0:
             return True
@@ -90,8 +90,19 @@ class User:
 
     @staticmethod
     def select_all_by_id(user_id):
-        sql = 'select * from ' + User.db_name + ' where id=' + str(user_id)
+        sql = 'select * from ' + User.db_name + ' where id_delete = 0 and  id=' + str(user_id)
         return list(db.query(sql))[0]
+
+    @staticmethod
+    def select_login_user(email, password):
+        sql = 'select count(*) from db_user where email ="' + email + '" and password="' + util.encode_string(
+            password) + '"'
+        return list(config.mysql.query(sql))
+
+    @staticmethod
+    def update_password_by_email(email, password):
+        sql = 'update db_user set password="' + util.encode_string(password) + '" where email ="' + email + '"'
+        config.mysql.query(sql)
 
 
 class Ridicule:
@@ -99,13 +110,28 @@ class Ridicule:
 
     @staticmethod
     def select_by_user_id(user_id):
-        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where user_id=' + str(user_id)
+        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where id_delete = 0 and  user_id=' + str(
+            user_id)
         return list(db.query(sql))
 
     @staticmethod
     def select_by_id(ridicule_id):
-        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where id=' + str(ridicule_id)
+        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where id_delete = 0 and  id=' + str(
+            ridicule_id)
         return list(db.query(sql))[0]
+
+    @staticmethod
+    def get_ridicule_by_user_id_list(user_id_list):
+        sql = 'select id,user_id,content from db_ridicule where user_id in (' + ','.join(
+            user_id_list) + ') order by create_time desc'
+        data = list(db.query(sql))
+        return data
+
+    @staticmethod
+    def insert(user_id, ridicule):
+        sql = 'insert into db_ridicule(create_time,user_id,content)values("' + util.make_create_time() + '",' + str(
+            user_id) + ',"' + ridicule + '")'
+        config.mysql.query(sql)
 
 
 class Like:
@@ -113,7 +139,7 @@ class Like:
 
     @staticmethod
     def select_by_ridicule_id(ridicule_id):
-        sql = 'select id,user_id from ' + Like.db_name + ' where ridicule_id=' + str(ridicule_id)
+        sql = 'select id,user_id from ' + Like.db_name + ' where id_delete = 0 and  ridicule_id=' + str(ridicule_id)
         return list(db.query(sql))
 
 
@@ -122,7 +148,23 @@ class Comment:
 
     @staticmethod
     def select_by_ridicule_id(ridicule_id):
-        sql = 'select id,user_id,content from ' + Comment.db_name + ' where ridicule_id=' + str(ridicule_id)
+        sql = 'select id,user_id,content from ' + Comment.db_name + ' where id_delete = 0 and ridicule_id=' + str(
+            ridicule_id)
         return list(db.query(sql))
+
+
+class Friend:
+    db_name = 'db_friend'
+
+    @staticmethod
+    def select_by_user_id(user_id):
+        sql = 'select * from ' + Friend.db_name + ' where id_delete = 0 and main_user_id=' + str(user_id)
+        return list(db.query(sql))
+
+    @staticmethod
+    def select_open_friends_by_user_id(user_id):
+        sql = 'select related_user_id from db_relationship where id_delete = 0 and main_user_id=' + str(
+            user_id) + ' and is_open =1'
+        return list(config.mysql.query(sql))
 
 

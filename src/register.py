@@ -37,8 +37,7 @@ class Index:
         if email != send_email or password != repeat_password:
             web.seeother('../invite/')
             return
-        sql = 'update db_user set password="' + util.encode_string(password) + '" where email ="' + email + '"'
-        config.mysql.query(sql)
+        pdbc.User.update_password_by_email(email, password)
         web.seeother('../login/')
 
 
