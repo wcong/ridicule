@@ -1,13 +1,13 @@
 $def with (data)
-<form>
-  <fieldset>
-    <legend>setting</legend>
-    <label>password
-      <input type="password" placeholder="Inputs password">
-    </label>
-    <label>repeat password
-      <input type="password" placeholder="Inputs password">
-    </label>
-    <button type="submit">Submit</button>
-  </fieldset>
+<form method="post">
+    <fieldset>
+        <legend>setting</legend>
+        <label>password
+            <input type="password" name="password" placeholder="Inputs password">
+        </label>
+        <label>repeat password
+            <input type="password" name="repeat_password" placeholder="Inputs password">
+        </label>
+        <button type="submit">Submit</button>
+    </fieldset>
 </form>

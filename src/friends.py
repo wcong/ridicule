@@ -48,6 +48,7 @@ class Find:
         user_id_list = list()
         for friend in friend_id_list:
             user_id_list.append(str(friend['related_user_id']))
+        user_id_list.append(str(user_id))
         find_list = pdbc.User.select_by_company_id(user['company_id'], user_id_list)
         data = dict()
         data['find_list'] = find_list

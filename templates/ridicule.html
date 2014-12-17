@@ -1,8 +1,9 @@
 $def with (data)
-<div class="panel">
-    <p>$data['ridicule']['content']</p>
-</div>
-<ul class="button-group">
-    <li><a href="#" class="button">comment<span class="info label">$data['comment_num']</span></a></li>
-    <li><a href="#" class="button">like<span class="info label">$data['like_num']</span></a></li>
+<ul class="pricing-table">
+    <li class="title">$data['ridicule']['content']</li>
+    <li class="cta-button">
+        <a href="#" class="button tiny" id="comment">comment <span class="info label round">$data['comment_num']</span></a>
+        <a href="#" class="button tiny" id="like">like <span class="info label round">$data['like_num']</span></a>
+    </li>
 </ul>
+<script src="/static/js/app/ridicule.js"></script>

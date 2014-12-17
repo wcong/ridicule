@@ -18,8 +18,10 @@ class Index:
         user_id = pdbc.User.select_id_by_email(email)
         user_id_list = Index.get_readable_user_id(user_id)
         ridicule_list = pdbc.Ridicule.get_ridicule_by_user_id_list(user_id_list)
+        user_map = pdbc.User.get_user_map_by_user_id(user_id_list)
         data = dict()
         data['ridicule_list'] = ridicule_list
+        data['user_map'] = user_map
         return config.render.home(data)
 
 

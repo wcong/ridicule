@@ -21,5 +21,15 @@ class Index:
         data['user'] = user
         return config.render.setting(data)
 
+    def POST(self):
+        email = util.get_user_email()
+        password = web.input().get("password")
+        repeat_password = web.input().get("repeat_password")
+        if password != repeat_password:
+            web.seeother('./')
+            return
+        pdbc.User.update_password_by_email(email, password)
+        web.seeother('../home/')
+
 
 app_setting = web.application(urls, locals())
