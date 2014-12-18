@@ -81,3 +81,14 @@ CREATE TABLE `db_friend` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `relationship` (`main_user_id`,`related_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户关系表';
+
+CREATE TABLE `db_reminder` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `remind_user_id` int(11) NOT NULL COMMENT '当事人id',
+  `remind_type` int(11)  NOT NULL  comment '关系人id',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `relationship` (`main_user_id`,`related_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户关系表';

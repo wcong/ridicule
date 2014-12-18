@@ -2,9 +2,7 @@
 # encoding=utf8
 
 import sys
-
 import web
-
 from src import *
 
 
@@ -56,5 +54,5 @@ class Index:
 if __name__ == "__main__":
     app = web.application(urls, globals())
     app.add_processor(login_hook)
-    app.run()
+    app.run(config.Log)
 
