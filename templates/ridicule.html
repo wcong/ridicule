@@ -1,9 +1,18 @@
 $def with (data)
 <ul class="pricing-table">
     <li class="title">$data['ridicule']['content']</li>
-    <li class="cta-button">
-        <a href="#" class="button tiny" id="comment">comment <span class="info label round">$data['comment_num']</span></a>
-        <a href="#" class="button tiny" id="like">like <span class="info label round">$data['like_num']</span></a>
+    <li class="cta-button" ridicule_id = "$data['ridicule']['id']">
+        <a href="#" class="button tiny" id="comment">
+            comment
+            <span class="info label round">$data['comment_num']</span>
+        </a>
+        <a href="#" class="button tiny
+        $if data['is_liked']:
+            success
+        " id="like">
+            like
+            <span class="info label round">$data['like_num']</span>
+        </a>
     </li>
 </ul>
 <script src="/static/js/app/ridicule.js"></script>

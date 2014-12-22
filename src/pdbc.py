@@ -168,6 +168,26 @@ class Like:
         sql = 'select id,user_id from ' + Like.db_name + ' where is_delete = 0 and  ridicule_id=' + str(ridicule_id)
         return list(db.query(sql))
 
+    @staticmethod
+    def liked_list(user_id, ridicule_id):
+        sql = 'select id,user_id,is_delete from ' + Like.db_name + ' where user_id=' + str(
+            user_id) + ' and ridicule_id=' + str(ridicule_id)
+        return list(db.query(sql))
+
+    @staticmethod
+    def insert(user_id, ridicule_id):
+        sql = 'insert into ' + Like.db_name + \
+              '(create_time,ridicule_id,user_id)values("' + \
+              util.make_create_time() + '",' + str(ridicule_id) + ',' + str(user_id) + ')'
+        db.query(sql)
+
+    @staticmethod
+    def change_is_deleted(like_id, is_deleted):
+        sql = 'update ' + Like.db_name + \
+              ' set is_delete=' + str(is_deleted) + \
+              ' where id=' + str(like_id)
+        db.query(sql)
+
 
 class Comment:
     db_name = 'db_comment'
