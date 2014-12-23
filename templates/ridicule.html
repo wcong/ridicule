@@ -1,18 +1,43 @@
 $def with (data)
 <ul class="pricing-table">
     <li class="title">$data['ridicule']['content']</li>
-    <li class="cta-button" ridicule_id = "$data['ridicule']['id']">
+    <li class="cta-button" ridicule_id="$data['ridicule']['id']">
         <a href="#" class="button tiny" id="comment">
             comment
-            <span class="info label round">$data['comment_num']</span>
+            <span class="info label radius">$data['comment_num']</span>
         </a>
         <a href="#" class="button tiny
         $if data['is_liked']:
             success
         " id="like">
             like
-            <span class="info label round">$data['like_num']</span>
+            <span class="info label radius">$data['like_num']</span>
         </a>
     </li>
+
 </ul>
+<div id="comment_list_box" style="display:none;">
+    <div>
+        <form>
+            <div class="row">
+                <div class="large-6 columns">
+                    <div class="row collapse postfix-round">
+                        <div class="small-9 columns">
+                            <input type="text" placeholder="comment" id = "comment_content">
+                        </div>
+                        <div class="small-3 columns">
+                            <a class="button postfix" id="send_comment" ridicule_id ="$data['ridicule']['id']" >Go</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    $for comment in data['comment_list']:
+        <div class="panel">
+            $data['user_map'][str(comment['user_id'])]
+            :
+            $comment['content']
+        </div>
+<div>
 <script src="/static/js/app/ridicule.js"></script>

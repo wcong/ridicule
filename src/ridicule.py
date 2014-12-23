@@ -22,6 +22,10 @@ class Index:
         user_id = pdbc.User.select_id_by_email(email)
         ridicule = pdbc.Ridicule.select_by_id(ridicule_id)
         comment_list = pdbc.Comment.select_by_ridicule_id(ridicule_id)
+        comment_user_list = list()
+        for comment in comment_list:
+            comment_user_list.append(str(comment['user_id']))
+        user_map = pdbc.User.get_user_map_by_user_id(comment_user_list)
         like_list = pdbc.Like.select_by_ridicule_id(ridicule_id)
         is_liked = False
         for like in like_list:
@@ -34,7 +38,18 @@ class Index:
         data['comment_list'] = comment_list
         data['comment_num'] = len(comment_list)
         data['is_liked'] = is_liked
+        data['user_map'] = user_map
         return config.render.ridicule(data)
+
+
+class Comment:
+    def POST(self):
+        input = web.input()
+        email = util.get_user_email()
+        user_id = pdbc.User.select_id_by_email(email)
+        ridicule_id = input.get("id")
+        comment = input.get("comment")
+        pdbc.Comment.insert(user_id, ridicule_id, comment)
 
 
 class Like:

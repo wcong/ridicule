@@ -114,6 +114,8 @@ class User:
 
     @staticmethod
     def get_user_map_by_user_id(user_id_list):
+        if len(user_id_list) == 0:
+            return dict()
         sql = 'select id,email,nickname,is_nickname from ' \
               + User.db_name + \
               ' where is_delete =0 ' + \
@@ -197,6 +199,14 @@ class Comment:
         sql = 'select id,user_id,content from ' + Comment.db_name + ' where is_delete = 0 and ridicule_id=' + str(
             ridicule_id)
         return list(db.query(sql))
+
+    @staticmethod
+    def insert(user_id, ridicule_id, comment):
+        sql = 'insert into ' + Comment.db_name + \
+              '(create_time,user_id,ridicule_id,content)' \
+              'values' \
+              '("' + util.make_create_time() + '",' + str(user_id) + ',' + str(ridicule_id) + ',"' + comment + '")'
+        db.query(sql)
 
 
 class Friend:
