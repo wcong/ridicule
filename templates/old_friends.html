@@ -1,9 +1,9 @@
 $def with (data)
 $for friend in data['friend_list']:
     <div class="panel">
-        <p>$data['user_map'][str(friend['related_user_id'])]</p>
+        <p class="left">$data['user_map'][str(friend['related_user_id'])]</p>
 
-        <div class="switch radius">
+        <div class="switch radius right">
             <input  friend_id = "$friend['id']"
                     class = "read_open" id="is_open"
                     type="checkbox" name="is_open"
