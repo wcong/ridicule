@@ -69,7 +69,12 @@ class Find:
         user_id = pdbc.User.select_id_by_email(email)
         add_user_id = web.input().get("user_id")
         pdbc.Friend.insert(add_user_id, user_id)
+        Find.send_reminder(add_user_id, user_id)
         web.seeother('./old')
+
+    @staticmethod
+    def send_reminder(add_user_id, user_id):
+        pdbc.ReminderFriend.insert(add_user_id, user_id)
 
 
 app_friends = web.application(urls, locals())

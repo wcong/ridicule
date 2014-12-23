@@ -144,7 +144,7 @@ class Ridicule:
 
     @staticmethod
     def select_by_id(ridicule_id):
-        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where is_delete = 0 and  id=' + str(
+        sql = 'select id,user_id,create_time,content from ' + Ridicule.db_name + ' where is_delete = 0 and  id=' + str(
             ridicule_id)
         return list(db.query(sql))[0]
 
@@ -202,11 +202,11 @@ class Comment:
 
     @staticmethod
     def insert(user_id, ridicule_id, comment):
-        sql = 'insert into ' + Comment.db_name + \
-              '(create_time,user_id,ridicule_id,content)' \
-              'values' \
-              '("' + util.make_create_time() + '",' + str(user_id) + ',' + str(ridicule_id) + ',"' + comment + '")'
-        db.query(sql)
+        return db.insert(Comment.db_name,
+                         create_time=util.make_create_time(),
+                         user_id=user_id,
+                         ridicule_id=ridicule_id,
+                         content=comment)
 
 
 class Friend:
@@ -249,3 +249,54 @@ class Friend:
         db.query(sql)
 
 
+class ReminderFriend:
+    db_name = 'db_reminder_friend'
+
+    @staticmethod
+    def insert(user_id, request_user_id):
+        sql = 'insert into ' + ReminderFriend.db_name + \
+              '(create_time,user_id,request_user_id)values' \
+              '("' + util.make_create_time() + '",' + str(user_id) + ',' + str(request_user_id) + ')'
+        db.query(sql)
+
+
+class ReminderComment:
+    db_name = 'db_reminder_comment'
+
+    @staticmethod
+    def insert(user_id, comment_user_id, comment_id):
+        return db.insert(ReminderComment.db_name,
+                         create_time=util.make_create_time(),
+                         user_id=user_id,
+                         comment_user_id=comment_user_id,
+                         comment_id=comment_id)
+
+
+class ReminderLike:
+    db_name = 'db_reminder_like'
+
+    @staticmethod
+    def insert_or_update(user_id, like_user_id):
+        data = ReminderLike.select(user_id, like_user_id)
+        if len(data) == 0:
+            return db.insert(ReminderLike.db_name,
+                             create_time=util.make_create_time(),
+                             user_id=user_id,
+                             like_user_id=like_user_id)
+        else:
+            ReminderLike.update(user_id, like_user_id, 0)
+
+
+    @staticmethod
+    def select(user_id, like_user_id):
+        sql = 'select id from ' + ReminderLike.db_name + \
+              ' where ' \
+              'user_id=' + str(user_id) + ' and like_user_id=' + str(like_user_id)
+        return list(db.query(sql))
+
+    @staticmethod
+    def update(user_id, like_user_id, is_read):
+        sql = 'update ' + ReminderLike.db_name + \
+              ' set is_read = ' + str(is_read) + \
+              ' where user_id=' + str(user_id) + ' and like_user_id=' + str(like_user_id)
+        db.query(sql)

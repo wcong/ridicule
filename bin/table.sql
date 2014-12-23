@@ -82,13 +82,39 @@ CREATE TABLE `db_friend` (
   UNIQUE KEY `relationship` (`main_user_id`,`related_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户关系表';
 
-CREATE TABLE `db_reminder` (
+CREATE TABLE `db_reminder_friend` (
   `id` int(11) NOT NULL auto_increment,
   `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
   `create_time` datetime NOT NULL,
   `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `remind_user_id` int(11) NOT NULL COMMENT '当事人id',
-  `remind_type` int(11)  NOT NULL  comment '关系人id',
+  `is_read` tinyint(1) NOT NULL default 0 comment '是否阅读',
+  `user_id` int(11) NOT NULL COMMENT '当事人id',
+  `request_user_id` int(11)  NOT NULL  comment '请求人id',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `relationship` (`main_user_id`,`related_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户关系表';
+  UNIQUE KEY `relationship` (`user_id`,`request_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户请求提醒表';
+
+CREATE TABLE `db_reminder_like` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `is_read` tinyint(1) NOT NULL default 0 comment '是否阅读',
+  `user_id` int(11) NOT NULL COMMENT '当事人id',
+  `like_user_id` int(11)  NOT NULL  comment 'like人id',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `relationship` (`user_id`,`like_user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='like提醒表';
+
+CREATE TABLE `db_reminder_comment` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `is_read` tinyint(1) NOT NULL default 0 comment '是否阅读',
+  `user_id` int(11) NOT NULL COMMENT '当事人id',
+  `comment_user_id` int(11)  NOT NULL  comment 'comment人id',
+  `comment_id` int(11)  NOT NULL  comment 'comment_id',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `relationship` (`user_id`,`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='comment提醒表';

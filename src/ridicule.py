@@ -49,7 +49,10 @@ class Comment:
         user_id = pdbc.User.select_id_by_email(email)
         ridicule_id = input.get("id")
         comment = input.get("comment")
-        pdbc.Comment.insert(user_id, ridicule_id, comment)
+        comment_id = pdbc.Comment.insert(user_id, ridicule_id, comment)
+        ridicule = pdbc.Ridicule.select_by_id(ridicule_id)
+        if ridicule['user_id'] != user_id:
+            pdbc.ReminderComment.insert(ridicule_id['user_id'], user_id, comment_id)
 
 
 class Like:
@@ -71,6 +74,12 @@ class Like:
             else:
                 data['now'] = True
                 pdbc.Like.change_is_deleted(like['id'], 0)
+        ridicule = pdbc.Ridicule.select_by_id(ridicule_id)
+        if ridicule['user_id'] != user_id:
+            if data['now']:
+                pdbc.ReminderLike.insert_or_update(ridicule['user_id'], user_id)
+            else:
+                pdbc.ReminderLike.update(ridicule['user_id'], user_id, 1)
         return json.dumps(data)
 
 
