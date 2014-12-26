@@ -7,6 +7,10 @@ in this community , we can ridicule our company safely.
 
 we can unit each other when the company is intolerable,fight for ourselves
 
+### how to run 
+
+check wiki [run](https://github.com/wcong/ridicule/wiki/run)
+
 ### what do we use
 1.  mysql 
 2.  python
