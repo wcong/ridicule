@@ -52,7 +52,7 @@ class Comment:
         comment_id = pdbc.Comment.insert(user_id, ridicule_id, comment)
         ridicule = pdbc.Ridicule.select_by_id(ridicule_id)
         if ridicule['user_id'] != user_id:
-            pdbc.ReminderComment.insert(ridicule_id['user_id'], user_id, comment_id)
+            pdbc.ReminderComment.insert(ridicule['user_id'], user_id, comment_id)
 
 
 class Like:
