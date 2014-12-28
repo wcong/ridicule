@@ -1,16 +1,17 @@
-$def with (data)
-$for friend in data['friend_list']:
-    <div class="panel">
-        <p class="left">$data['user_map'][str(friend['related_user_id'])]</p>
-
-        <div class="switch radius right">
-            <input  friend_id = "$friend['id']"
-                    class = "read_open" id="is_open"
-                    type="checkbox" name="is_open"
-            $if friend['is_open'] == 1:
-                checked
-            >
-            <label for="is_open"></label>
+<script type="text/template" id="contentTemplate">
+    <form id="friend_list">
+        {{#friend_list}}
+        <div class="row collapse">
+            <div class="small-9 large-10 columns">
+                <span class="prefix">{{name}}</span>
+            </div>
+            <div class="small-3 large-2 columns">
+                <a class="button postfix read_open {{color}}" friend_id="{{id}}" action_status="{{action_status}}">
+                    {{action}}
+                </a>
+            </div>
         </div>
-    </div>
+        {{/friend_list}}
+    </form>
+</script>
 <script src="/static/js/app/old_friend.js"></script>

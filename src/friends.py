@@ -5,6 +5,7 @@ import config
 import web
 import util
 import pdbc
+import json
 
 urls = (
     '/', 'Index',
@@ -20,6 +21,12 @@ class Index:
 
 class Old:
     def GET(self):
+        if util.is_json_request():
+            return self.get_json()
+        else:
+            return config.render.old_friends()
+
+    def get_json(self):
         email = util.get_user_email()
         user_id = pdbc.User.select_id_by_email(email)
         friend_list = pdbc.Friend.select_by_user_id(user_id)
@@ -30,14 +37,14 @@ class Old:
         data = dict()
         data['friend_list'] = friend_list
         data['user_map'] = user_map
-        return config.render.old_friends(data)
+        return json.dumps(data)
 
     def POST(self):
-        email = util.get_user_email()
+        # email = util.get_user_email()
         # user_id = pdbc.User.select_id_by_email(email)
         is_open = web.input().get("is_open")
         friend_id = web.input().get("id")
-        if is_open == 'on':
+        if is_open == '1':
             is_open = 1
         else:
             is_open = 0
@@ -46,6 +53,12 @@ class Old:
 
 class Find:
     def GET(self):
+        if util.is_json_request():
+            return self.get_json()
+        else:
+            return config.render.find_friends()
+
+    def get_json(self):
         email = util.get_user_email()
         user_id = pdbc.User.select_id_by_email(email)
         user = pdbc.User.select_all_by_id(user_id)
@@ -62,7 +75,7 @@ class Find:
         data = dict()
         data['find_list'] = find_list
         data['user_map'] = user_map
-        return config.render.find_friends(data)
+        return json.dumps(data)
 
     def POST(self):
         email = util.get_user_email()

@@ -23,7 +23,8 @@ urls = (
     '/ridicule', ridicule.app_ridicule,
     '/my', my.app_my,
     '/friends', friends.app_friends,
-    '/nickname', nickname.app_nickname
+    '/nickname', nickname.app_nickname,
+    '/reminder', reminder.app_reminder
 )
 
 web.config.debug = True

@@ -1,7 +1,15 @@
-$def with (data)
-$for find in data['find_list']:
-    <div class="panel">
-        <p>$data['user_map'][str(find['id'])]</p>
-        <button class="button add_friend" user_id="$find['id']">add</button>
-    </div>
+<script type="text/template" id="contentTemplate">
+    <form id="find_friend">
+        {{#find_list}}
+        <div class="row collapse">
+            <div class="small-9 large-10 columns">
+                <span class="prefix">{{name}}</span>
+            </div>
+            <div class="small-3 large-2 columns">
+                <a class="button postfix add_friend" user_id="{{id}}">add</a>
+            </div>
+        </div>
+        {{/find_list}}
+    </form>
+</script>
 <script src="/static/js/app/find_friend.js"></script>

@@ -37,3 +37,10 @@ def make_create_time():
 def extract_company_from_email(email):
     email_array = email.split('@')
     return email_array[len(email_array) - 1]
+
+
+def is_json_request():
+    if web.ctx.env.get('HTTP_ACCEPT').lower().find('json') > -1:
+        return True
+    else:
+        return False

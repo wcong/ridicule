@@ -214,7 +214,8 @@ class Friend:
 
     @staticmethod
     def select_by_user_id(user_id):
-        sql = 'select * from ' + Friend.db_name + ' where is_delete = 0 and main_user_id=' + str(user_id)
+        sql = 'select id,related_user_id,is_open from ' + Friend.db_name + \
+              ' where is_delete = 0 and main_user_id=' + str(user_id)
         return list(db.query(sql))
 
     @staticmethod
@@ -259,6 +260,12 @@ class ReminderFriend:
               '("' + util.make_create_time() + '",' + str(user_id) + ',' + str(request_user_id) + ')'
         db.query(sql)
 
+    @staticmethod
+    def select_reminder(user_id):
+        sql = 'select request_user_id from' + ReminderFriend.db_name + \
+              ' where user_id= ' + str(user_id) + ' and is_read = 0'
+        return list(db.query(sql))
+
 
 class ReminderComment:
     db_name = 'db_reminder_comment'
@@ -270,6 +277,12 @@ class ReminderComment:
                          user_id=user_id,
                          comment_user_id=comment_user_id,
                          comment_id=comment_id)
+
+    @staticmethod
+    def select_reminder(user_id):
+        sql = 'select comment_user_id,comment_id from ' + ReminderComment.db_name + \
+              ' where user_id=' + str(user_id) + ' and is_read = 0'
+        return list(db.query(sql))
 
 
 class ReminderLike:
@@ -295,8 +308,15 @@ class ReminderLike:
         return list(db.query(sql))
 
     @staticmethod
+    def select_reminder(user_id):
+        sql = 'select id,like_user_id from ' + ReminderLike.db_name + \
+              ' where user_id=' + str(user_id) + ' and is_read = 0'
+        return list(db.query(sql))
+
+    @staticmethod
     def update(user_id, like_user_id, is_read):
         sql = 'update ' + ReminderLike.db_name + \
               ' set is_read = ' + str(is_read) + \
               ' where user_id=' + str(user_id) + ' and like_user_id=' + str(like_user_id)
         db.query(sql)
+

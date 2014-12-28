@@ -12,6 +12,7 @@ $def with (content)
     <script src="/static/js/vendor/jquery.js"></script>
     <script src="/static/js/vendor/fastclick.js"></script>
     <script src="/static/js/foundation.min.js"></script>
+    <script src="/static/js/mustache.js"></script>
 </head>
 <body>
 <div class="off-canvas-wrap" data-offcanvas>
@@ -36,7 +37,7 @@ $def with (content)
                 <li><a href="/nickname/">nickname</a></li>
             </ul>
         </aside>
-        <section class="main-section">
+        <section class="main-section" id = "main-section">
             $:content
         </section>
         <a class="exit-off-canvas"></a>

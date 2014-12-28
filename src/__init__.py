@@ -10,5 +10,6 @@ __all__ = [
     'ridicule',
     'my',
     'friends',
-    'nickname'
+    'nickname',
+    'reminder'
 ]
