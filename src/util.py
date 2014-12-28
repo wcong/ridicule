@@ -23,11 +23,11 @@ def get_user_email():
 
 
 def encode_string(string):
-    return base64.encodestring(string)
+    return base64.standard_b64encode(string)
 
 
 def decode_string(string):
-    return base64.decodestring(string)
+    return base64.standard_b64decode(string)
 
 
 def make_create_time():
