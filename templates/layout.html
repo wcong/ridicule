@@ -13,6 +13,7 @@ $def with (content)
     <script src="/static/js/vendor/fastclick.js"></script>
     <script src="/static/js/foundation.min.js"></script>
     <script src="/static/js/mustache.js"></script>
+    <script src="/static/js/app/app.js"></script>
 </head>
 <body>
 <div class="off-canvas-wrap" data-offcanvas>
@@ -22,8 +23,16 @@ $def with (content)
                 <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
             </section>
 
-            <section class="right tab-bar-section">
+            <section class="middle tab-bar-section">
                 <h1 class="title">ridicule</h1>
+            </section>
+
+            <section class="right-small">
+                <a class="right-off-canvas-toggle menu-icon" href="#">
+                    <span>
+                        <span id="all_reminder"></span>
+                    </span>
+                </a>
             </section>
         </nav>
 
@@ -37,14 +46,39 @@ $def with (content)
                 <li><a href="/nickname/">nickname</a></li>
             </ul>
         </aside>
-        <section class="main-section" id = "main-section">
+        <aside class="right-off-canvas-menu" id="reminder_list">
+        </aside>
+        <section class="main-section" id="main-section">
             $:content
         </section>
         <a class="exit-off-canvas"></a>
     </div>
 </div>
-<script>
-    $$(document).foundation();
+<script type="text/template" id="reminderTemplate">
+    <ul class="off-canvas-list">
+        <li>
+            <a href="/friends/old">
+                friend
+                <span class="label radio">{{friend_num}}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                like
+                <span class="label radio">
+                {{like_num}}
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                comment
+                <span class="label radio">
+                {{comment_num}}
+                </span>
+            </a>
+        </li>
+    </ul>
 </script>
 </body>
 </html>

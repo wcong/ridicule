@@ -262,7 +262,7 @@ class ReminderFriend:
 
     @staticmethod
     def select_reminder(user_id):
-        sql = 'select request_user_id from' + ReminderFriend.db_name + \
+        sql = 'select request_user_id from ' + ReminderFriend.db_name + \
               ' where user_id= ' + str(user_id) + ' and is_read = 0'
         return list(db.query(sql))
 

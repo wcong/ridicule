@@ -16,7 +16,7 @@ urls = (
 
 class Index():
     def GET(self):
-        if web.ctx.get('Accept').lower() == 'json':
+        if util.is_json_request():
             return self.get_json()
         else:
             return self.get_html()
@@ -29,11 +29,15 @@ class Index():
         comment_list = pdbc.ReminderComment.select_reminder(user_id)
         data = dict()
         data['like_list'] = like_list
+        data['like_num'] = len(like_list)
         data['friend_list'] = friend_list
+        data['friend_num'] = len(friend_list)
         data['comment_list'] = comment_list
+        data['comment_num'] = len(comment_list)
         return json.dumps(data)
 
     def get_html(self):
         return config.render.notice({"hello": "world"})
 
-app_reminder = web.application(urls,locals())
+
+app_reminder = web.application(urls, locals())
