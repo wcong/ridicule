@@ -21,6 +21,10 @@ class Index:
 
 class Old:
     def GET(self):
+        if web.input().get("is_clear_reminder") is not None:
+            email = util.get_user_email()
+            user_id = pdbc.User.select_id_by_email(email)
+            pdbc.ReminderFriend.clear_reminder(user_id)
         if util.is_json_request():
             return self.get_json()
         else:

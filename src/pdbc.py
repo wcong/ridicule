@@ -266,17 +266,24 @@ class ReminderFriend:
               ' where user_id= ' + str(user_id) + ' and is_read = 0'
         return list(db.query(sql))
 
+    @staticmethod
+    def clear_reminder(user_id):
+        sql = 'update ' + ReminderFriend.db_name + \
+              ' set is_read = 1 where user_id=' + str(user_id)
+        db.query(sql)
+
 
 class ReminderComment:
     db_name = 'db_reminder_comment'
 
     @staticmethod
-    def insert(user_id, comment_user_id, comment_id):
+    def insert(user_id, comment_user_id, comment_id, ridicule_id):
         return db.insert(ReminderComment.db_name,
                          create_time=util.make_create_time(),
                          user_id=user_id,
                          comment_user_id=comment_user_id,
-                         comment_id=comment_id)
+                         comment_id=comment_id,
+                         ridicule_id=ridicule_id)
 
     @staticmethod
     def select_reminder(user_id):
@@ -284,27 +291,34 @@ class ReminderComment:
               ' where user_id=' + str(user_id) + ' and is_read = 0'
         return list(db.query(sql))
 
+    @staticmethod
+    def clear_reminder(ridicule_id):
+        sql = 'update ' + ReminderComment.db_name + \
+              ' set is_read = 1 where comment_ridicule_id=' + str(ridicule_id)
+        db.query(sql)
+
 
 class ReminderLike:
     db_name = 'db_reminder_like'
 
     @staticmethod
-    def insert_or_update(user_id, like_user_id):
-        data = ReminderLike.select(user_id, like_user_id)
+    def insert_or_update(user_id, like_user_id, ridicule_id):
+        data = ReminderLike.select(ridicule_id, like_user_id)
         if len(data) == 0:
             return db.insert(ReminderLike.db_name,
                              create_time=util.make_create_time(),
                              user_id=user_id,
+                             like_ridicule_id=ridicule_id,
                              like_user_id=like_user_id)
         else:
-            ReminderLike.update(user_id, like_user_id, 0)
+            ReminderLike.update(ridicule_id, like_user_id, 0)
 
 
     @staticmethod
-    def select(user_id, like_user_id):
+    def select(ridicule_id, like_user_id):
         sql = 'select id from ' + ReminderLike.db_name + \
               ' where ' \
-              'user_id=' + str(user_id) + ' and like_user_id=' + str(like_user_id)
+              'like_ridicule_id=' + str(ridicule_id) + ' and like_user_id=' + str(like_user_id)
         return list(db.query(sql))
 
     @staticmethod
@@ -314,9 +328,51 @@ class ReminderLike:
         return list(db.query(sql))
 
     @staticmethod
-    def update(user_id, like_user_id, is_read):
+    def update(ridicule_id, like_user_id, is_read):
         sql = 'update ' + ReminderLike.db_name + \
               ' set is_read = ' + str(is_read) + \
-              ' where user_id=' + str(user_id) + ' and like_user_id=' + str(like_user_id)
+              ' where like_ridicule_id=' + str(ridicule_id) + ' and like_user_id=' + str(like_user_id)
         db.query(sql)
+
+    @staticmethod
+    def clear_reminder(ridicule_id):
+        sql = 'update ' + ReminderLike.db_name + \
+              ' set is_read=1 where like_ridicule_id = ' + str(ridicule_id)
+        db.query(sql)
+
+
+class Boycott:
+    db_name = 'db_boycott'
+
+    @staticmethod
+    def insert(user_id, content):
+        return db.insert(Boycott.db_name,
+                         create_time=util.make_create_time(),
+                         user_id=user_id,
+                         content=content)
+
+
+class BoycottLike:
+    db_name = 'db_boycott_like'
+
+    @staticmethod
+    def insert(boycott_id, like_user_id):
+        return db.insert(BoycottLike.db_name,
+                         create_time=util.make_create_time(),
+                         boycott_id=boycott_id,
+                         like_user_id=like_user_id)
+class BoycottComment:
+    db_name = 'db_boycott_comment'
+
+    @staticmethod
+    def insert(boycott_id,comment_user_id,comment):
+        return  db.insert(BoycottComment.db_name,
+                          create_time=util.make_create_time(),
+                          boycott_id = boycott_id,
+                          comment_user_id=comment_user_id,
+                          content = comment)
+
+
+
+
 

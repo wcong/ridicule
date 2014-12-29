@@ -102,8 +102,9 @@ CREATE TABLE `db_reminder_like` (
   `is_read` tinyint(1) NOT NULL default 0 comment '是否阅读',
   `user_id` int(11) NOT NULL COMMENT '当事人id',
   `like_user_id` int(11)  NOT NULL  comment 'like人id',
+  `like_ridicule_id` int(11)  NOT NULL  comment 'the ridicule id of like for',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `relationship` (`user_id`,`like_user_id`)
+  UNIQUE KEY `like_relation` (`like_user_id`,`like_ridicule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='like提醒表';
 
 CREATE TABLE `db_reminder_comment` (
@@ -114,7 +115,12 @@ CREATE TABLE `db_reminder_comment` (
   `is_read` tinyint(1) NOT NULL default 0 comment '是否阅读',
   `user_id` int(11) NOT NULL COMMENT '当事人id',
   `comment_user_id` int(11)  NOT NULL  comment 'comment人id',
-  `comment_id` int(11)  NOT NULL  comment 'comment_id',
+  `comment_id` int(11)  NOT NULL  comment 'comment id',
+  `comment_ridicule_id` int(11)  NOT NULL  comment 'the ridicule id of comment for',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `relationship` (`user_id`,`comment_id`)
+  UNIQUE KEY `comment_ridicule_id` (`comment_ridicule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='comment提醒表';
+
+
+
+

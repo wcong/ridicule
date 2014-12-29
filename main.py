@@ -52,8 +52,13 @@ class Index:
         return config.render.index()
 
 
+def notfound():
+    return web.notfound(config.render.not_found())
+
+
 if __name__ == "__main__":
     app = web.application(urls, globals())
     app.add_processor(login_hook)
+    app.notfound = notfound
     app.run(config.Log)
 
