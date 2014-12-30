@@ -159,7 +159,13 @@ class Ridicule:
     def insert(user_id, ridicule):
         sql = 'insert into db_ridicule(create_time,user_id,content)values("' + util.make_create_time() + '",' + str(
             user_id) + ',"' + ridicule + '")'
-        config.mysql.query(sql)
+        db.query(sql)
+
+    @staticmethod
+    def select_by_batch_id(ridicule_id_list):
+        sql = 'select id,content from ' + Ridicule.db_name + \
+              ' where id in (' + ','.join(ridicule_id_list) + ') and is_delete = 0'
+        return list(db.query(sql))
 
 
 class Like:
@@ -283,11 +289,11 @@ class ReminderComment:
                          user_id=user_id,
                          comment_user_id=comment_user_id,
                          comment_id=comment_id,
-                         ridicule_id=ridicule_id)
+                         comment_ridicule_id=ridicule_id)
 
     @staticmethod
     def select_reminder(user_id):
-        sql = 'select comment_user_id,comment_id from ' + ReminderComment.db_name + \
+        sql = 'select comment_ridicule_id,comment_user_id,comment_id from ' + ReminderComment.db_name + \
               ' where user_id=' + str(user_id) + ' and is_read = 0'
         return list(db.query(sql))
 
@@ -323,7 +329,7 @@ class ReminderLike:
 
     @staticmethod
     def select_reminder(user_id):
-        sql = 'select id,like_user_id from ' + ReminderLike.db_name + \
+        sql = 'select id,like_ridicule_id,like_user_id from ' + ReminderLike.db_name + \
               ' where user_id=' + str(user_id) + ' and is_read = 0'
         return list(db.query(sql))
 
@@ -361,16 +367,18 @@ class BoycottLike:
                          create_time=util.make_create_time(),
                          boycott_id=boycott_id,
                          like_user_id=like_user_id)
+
+
 class BoycottComment:
     db_name = 'db_boycott_comment'
 
     @staticmethod
-    def insert(boycott_id,comment_user_id,comment):
-        return  db.insert(BoycottComment.db_name,
-                          create_time=util.make_create_time(),
-                          boycott_id = boycott_id,
-                          comment_user_id=comment_user_id,
-                          content = comment)
+    def insert(boycott_id, comment_user_id, comment):
+        return db.insert(BoycottComment.db_name,
+                         create_time=util.make_create_time(),
+                         boycott_id=boycott_id,
+                         comment_user_id=comment_user_id,
+                         content=comment)
 
 
 

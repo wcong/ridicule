@@ -57,27 +57,36 @@ $def with (content)
 <script type="text/template" id="reminderTemplate">
     <ul class="off-canvas-list">
         <li>
-            <a href="/friends/old">
-                friend
+            <a href="/friends/old?is_clear_reminder=true">
+                request
                 <span class="label radio">{{friend_num}}</span>
             </a>
         </li>
+        <li><label>like:{{like_num}}</label></li>
+        {{#like_list}}
         <li>
-            <a href="#">
-                like
+            <a href="/ridicule/?id={{id}}&clear_reminder=like">
                 <span class="label radio">
-                {{like_num}}
+                {{num}}
                 </span>
+                like
+                <span>{{text}}...</span>
+
             </a>
         </li>
+        {{/like_list}}
+        <li><label>comment{{comment_num}}</label></li>
+        {{#comment_list}}
         <li>
-            <a href="#">
-                comment
+            <a href="/ridicule/?id={{id}}&clear_reminder=comment">
                 <span class="label radio">
                 {{comment_num}}
                 </span>
+                comment
+                <span>{{text}}...</span>
             </a>
         </li>
+        {{/comment_list}}
     </ul>
 </script>
 </body>

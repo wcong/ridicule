@@ -18,6 +18,13 @@ urls = (
 class Index:
     def GET(self):
         ridicule_id = web.input().get('id')
+        clear_reminder = web.input().get("clear_reminder")
+        if clear_reminder is not None:
+            if clear_reminder == 'like':
+                pdbc.ReminderLike.clear_reminder(ridicule_id)
+            elif clear_reminder == 'comment':
+                pdbc.ReminderComment.clear_reminder(ridicule_id)
+
         email = util.get_user_email()
         user_id = pdbc.User.select_id_by_email(email)
         ridicule = pdbc.Ridicule.select_by_id(ridicule_id)
@@ -77,7 +84,7 @@ class Like:
         ridicule = pdbc.Ridicule.select_by_id(ridicule_id)
         if ridicule['user_id'] != user_id:
             if data['now']:
-                pdbc.ReminderLike.insert_or_update(ridicule['user_id'], user_id,ridicule_id)
+                pdbc.ReminderLike.insert_or_update(ridicule['user_id'], user_id, ridicule_id)
             else:
                 pdbc.ReminderLike.update(ridicule['user_id'], ridicule_id, 1)
         return json.dumps(data)

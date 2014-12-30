@@ -82,6 +82,7 @@ CREATE TABLE `db_friend` (
   UNIQUE KEY `relationship` (`main_user_id`,`related_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='用户关系表';
 
+---- reminder----
 CREATE TABLE `db_reminder_friend` (
   `id` int(11) NOT NULL auto_increment,
   `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
@@ -118,8 +119,55 @@ CREATE TABLE `db_reminder_comment` (
   `comment_id` int(11)  NOT NULL  comment 'comment id',
   `comment_ridicule_id` int(11)  NOT NULL  comment 'the ridicule id of comment for',
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `comment_ridicule_id` (`comment_ridicule_id`)
+  UNIQUE KEY `comment_id` (`comment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='comment提醒表';
+------ reminder----
+
+---------boycott------------
+CREATE TABLE `db_boycott` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL COMMENT 'id of user who start the boycott',
+  `content` int(11)  NOT NULL  comment 'content of the boycott',
+  `status` int(11)  NOT NULL  comment 'status of boycott(start,end)',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='boycott';
+
+CREATE TABLE `db_boycott_like` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `user_id` tinyint(1) NOT NULL default 0 comment 'id of user who like the boycott',
+  `boycott_id` int(11) NOT NULL COMMENT 'id of boycott',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `user_id_boycott_id` (`user_id`,`boycott_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='like of boycott_id';
+
+CREATE TABLE `db_boycott_comment` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `user_id` tinyint(1) NOT NULL default 0 comment 'id of user who comment the boycott',
+  `boycott_id` int(11) NOT NULL COMMENT 'id of the boycott',
+  `content` int(11)  NOT NULL  comment 'content of the comment',
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='comment of boycott';
+
+CREATE TABLE `db_boycott_result` (
+  `id` int(11) NOT NULL auto_increment,
+  `is_delete` tinyint(1) NOT NULL default 0 comment '是否删除',
+  `create_time` datetime NOT NULL,
+  `update_time` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `user_id` tinyint(1) NOT NULL default 0 comment 'id of user who send result',
+  `boycott_id` int(11) NOT NULL COMMENT 'id of the boycott',
+  `content` int(11)  NOT NULL  comment 'content of boycott result'
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8  comment='result of boycott';
+----- boycott---
 
 
 
