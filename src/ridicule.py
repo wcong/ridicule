@@ -108,7 +108,7 @@ class Write:
         user_id = pdbc.User.select_id_by_email(email)
         ridicule = web.input().get("ridicule")
         pdbc.Ridicule.insert(user_id, ridicule)
-        web.seeother('../my/')
+        web.seeother('../home/')
 
 
 class My:
