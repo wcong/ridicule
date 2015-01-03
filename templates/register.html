@@ -3,14 +3,14 @@ $def with (data)
     <fieldset>
         <legend>register</legend>
         <label>email
-            <input type="email" disabled name = "register_email" value="$data['email']">
+            <input class="radius" type="email" disabled name = "register_email" value="$data['email']">
         </label>
         <label>password
-            <input type="password" name = "password" placeholder="Inputs password">
+            <input class="radius" type="password" name = "password" placeholder="Inputs password">
         </label>
         <label>repeat password
-            <input type="password" name = "repeat_password" placeholder="Inputs password">
+            <input class="radius" type="password" name = "repeat_password" placeholder="Inputs password">
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" class="tiny radius">Submit</button>
     </fieldset>
 </form>
