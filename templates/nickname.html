@@ -1,16 +1,17 @@
-$def with (data)
-<form method="POST">
-    <fieldset>
-        <legend>nickname</legend>
-        <label>
-            <input name="nickname" value="$data['user']['nickname']">
-        </label>
-        <div>
-        <input id="checkbox" type="checkbox" name="is_nickname"
-        $if data['user']['is_nickname'] == 1:
-            checked
-        ><label for="checkbox">is_nick_name</label>
+<script type="text/template" id="contentTemplate">
+    <form method="POST" style="padding-top:10px;">
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="row collapse">
+                    <div class="small-10 columns">
+                        <input id="nickname" type="text" class="radius" placeholder="nickname" name="nickname" value="{{nickname}}">
+                    </div>
+                    <div class="small-2 columns">
+                        <a id="is_nickname" class="button postfix radius" action="1">use nickname</a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="submit" class = "tiny radio">Submit</button>
-    </fieldset>
-</form>
+    </form>
+</script>
+<script src="/static/js/app/nickname.js"></script>

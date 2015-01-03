@@ -1,5 +1,5 @@
 function init(){
-    $.getJSON('./',function(data){
+    $.getJSON('./my',function(data){
         if(data.list.length == 0){
             return;
         }

@@ -90,7 +90,7 @@ class User:
 
     @staticmethod
     def select_all_by_id(user_id):
-        sql = 'select * from ' + User.db_name + ' where is_delete = 0 and  id=' + str(user_id)
+        sql = 'select nickname,is_nickname from ' + User.db_name + ' where is_delete = 0 and  id=' + str(user_id)
         return list(db.query(sql))[0]
 
     @staticmethod

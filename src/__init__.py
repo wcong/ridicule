@@ -6,7 +6,7 @@ __all__ = [
     'login',
     'register',
     'home',
-    'setting',
+    'password',
     'ridicule',
     'my',
     'friends',

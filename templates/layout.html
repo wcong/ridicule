@@ -2,7 +2,8 @@ $def with (content)
 <html>
 <head>
     <title>ridicule</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
@@ -16,8 +17,8 @@ $def with (content)
     <script src="/static/js/mustache.js"></script>
     <script src="/static/js/app/app.js"></script>
 </head>
-<body >
-<div class="off-canvas-wrap" data-offcanvas  style="height:100%;">
+<body>
+<div class="off-canvas-wrap" data-offcanvas style="height:100%;">
     <div class="inner-wrap">
         <nav class="tab-bar">
             <section class="middle tab-bar-section">
@@ -32,19 +33,12 @@ $def with (content)
                 </a>
             </section>
         </nav>
-
-        <!--<aside class="left-off-canvas-menu">-->
-            <!--<ul class="off-canvas-list">-->
-                <!--<li><a href="/home/">home</a></li>-->
-                <!--<li><a href="/ridicule/write">write</a></li>-->
-                <!--<li><a href="/my/">my</a></li>-->
-                <!--<li><a href="/friends/">friends</a></li>-->
-                <!--<li><a href="/setting/">setting</a></li>-->
-                <!--<li><a href="/nickname/">nickname</a></li>-->
-            <!--</ul>-->
-        <!--</aside>-->
         <aside class="right-off-canvas-menu" id="reminder_list">
         </aside>
+        <div data-alert class="alert-box alert radius" style="display:none;" id="main-alert">
+            <p id="main-alert-text" style="display:inline;"></p>
+            <a href="#" class="close">&times;</a>
+        </div>
         <section class="main-section" id="main-section" style="overview-y:scroll;">
             $:content
         </section>

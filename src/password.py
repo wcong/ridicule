@@ -19,7 +19,7 @@ class Index:
         user = pdbc.User.select_all_by_id(user_id)
         data = dict()
         data['user'] = user
-        return config.render.setting(data)
+        return config.render.password(data)
 
     def POST(self):
         email = util.get_user_email()
@@ -32,4 +32,4 @@ class Index:
         web.seeother('../home/')
 
 
-app_setting = web.application(urls, locals())
+app_password = web.application(urls, locals())

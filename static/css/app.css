@@ -11,6 +11,9 @@ color:black;
 li.content-list .creator{
 font-weight:bold;
 }
+li.content-list i{
+font-weight:bold;
+}
 .ridicule_action a{
 width:49%;
 display: inline-block;

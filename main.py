@@ -17,7 +17,7 @@ urls = (
     '/', 'Index',
     '/login', login.app_login,
     '/home', home.app_home,
-    '/setting', setting.app_setting,
+    '/password', password.app_password,
     '/invite', invite.app_invite,
     '/register', register.app_register,
     '/ridicule', ridicule.app_ridicule,
