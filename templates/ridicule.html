@@ -1,43 +1,47 @@
-$def with (data)
-<ul class="pricing-table">
-    <li class="title">$data['ridicule']['content']</li>
-    <li class="cta-button" ridicule_id="$data['ridicule']['id']">
-        <a href="#" class="button tiny" id="comment">
-            comment
-            <span class="info label radius">$data['comment_num']</span>
-        </a>
-        <a href="#" class="button tiny
-        $if data['is_liked']:
-            success
-        " id="like">
-            like
-            <span class="info label radius">$data['like_num']</span>
-        </a>
-    </li>
-
-</ul>
-<div id="comment_list_box" style="display:none;">
-    <div>
-        <form>
+<script type="text/template" id="contentTemplate">
+    <ul class="row no-bullet" style="text-align:center;">
+        <li class="content-list">
+            <div class="creator">{{creator}}</div>
+            <div>{{ridicule}}</div>
+        </li>
+        <li class="content-list">
+            <div ridicule_id="{{id}}" class="ridicule_action" style="display: inline-block;width:100%;">
+                <a class="item" id="comment">
+                    <i class="fi-comment size-24">
+                        <span class="info label radius icon-label">{{comment_num}}</span>
+                    </i>
+                </a>
+                <a class="item" id="like">
+                    <i class="fi-like size-24">
+                        <span class="info label radius icon-label">{{like_num}}</span>
+                    </i>
+                </a>
+            </div>
+        </li>
+        <li class="content-list comment_li">
             <div class="row">
                 <div class="large-6 columns">
                     <div class="row collapse postfix-round">
                         <div class="small-9 columns">
-                            <input type="text" placeholder="comment" id = "comment_content">
+                            <input type="text" placeholder="comment" id="comment_content">
                         </div>
                         <div class="small-3 columns">
-                            <a class="button postfix" id="send_comment" ridicule_id ="$data['ridicule']['id']" >Go</a>
+                            <a class="button postfix" id="send_comment" ridicule_id="{{id}}">Go</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
-    </div>
-    $for comment in data['comment_list']:
-        <div class="panel">
-            $data['user_map'][str(comment['user_id'])]
-            :
-            $comment['content']
-        </div>
-<div>
+        </li>
+        {{#comment_list}}
+        <li class="content-list comment_li">
+            <div>
+                {{name}}
+                :
+                {{content}}
+            </div>
+        </li>
+        {{/comment_list}}
+    </ul>
+
+</script>
 <script src="/static/js/app/ridicule.js"></script>

@@ -1,6 +1,3 @@
-$(document).ready(function(){
-    init();
-})
 function init(){
     $.getJSON('./old',function(data){
         if( data.friend_list.length ==0 ){

@@ -1,7 +1,3 @@
-$(document).ready(function(){
-    init();
-
-})
 function init(){
     $.getJSON('./find',function(data){
         if( data.find_list.length ==0 ){

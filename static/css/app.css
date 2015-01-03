@@ -1,0 +1,21 @@
+.hover-grey:hover{
+background-color:#f5f8fa;
+}
+li.content-list{
+padding:10px;
+border:solid 1px #e1e8ed;
+border-left:none;
+border-right:none;
+color:black;
+}
+li.content-list .creator{
+font-weight:bold;
+}
+.ridicule_action a{
+width:49%;
+display: inline-block;
+text-align:center;
+height:30px;
+line-height:30px;
+vertical-align:middle;
+}

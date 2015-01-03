@@ -1,8 +1,13 @@
-$def with (data)
-$for view in data['ridicule_list']:
-    <a href="/ridicule/?id=$view['id']">
-        <div class="panel">
-            <h5>$data['user_map'][str(view['user_id'])]</h5>
-            <p>$view['content']</p>
-        </div>
-    </a>
+<script type="text/template" id="contentTemplate">
+    <ul class="row no-bullet">
+        {{#ridicule_list}}
+        <a href="/ridicule/?id={{id}}">
+            <li class="hover-grey content-list">
+                <div class="creator">{{name}}</div>
+                <div>{{content}}</div>
+            </li>
+        </a>
+        {{/ridicule_list}}
+    </ul>
+</script>
+<script src="/static/js/app/home.js"></script>

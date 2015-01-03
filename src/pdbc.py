@@ -138,13 +138,13 @@ class Ridicule:
 
     @staticmethod
     def select_by_user_id(user_id):
-        sql = 'select id,create_time,content from ' + Ridicule.db_name + ' where is_delete = 0 and  user_id=' + str(
+        sql = 'select id,content from ' + Ridicule.db_name + ' where is_delete = 0 and  user_id=' + str(
             user_id)
         return list(db.query(sql))
 
     @staticmethod
     def select_by_id(ridicule_id):
-        sql = 'select id,user_id,create_time,content from ' + Ridicule.db_name + ' where is_delete = 0 and  id=' + str(
+        sql = 'select id,user_id,content from ' + Ridicule.db_name + ' where is_delete = 0 and  id=' + str(
             ridicule_id)
         return list(db.query(sql))[0]
 

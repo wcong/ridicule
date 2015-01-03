@@ -3,8 +3,6 @@ __author__ = 'wcong'
 
 import web
 import config
-import util
-import pdbc
 
 urls = (
     '/', 'Index'
@@ -13,12 +11,7 @@ urls = (
 
 class Index:
     def GET(self):
-        email = util.get_user_email()
-        user_id = pdbc.User.select_id_by_email(email)
-        ridicule_list = pdbc.Ridicule.select_by_user_id(user_id)
-        data = dict()
-        data['list'] = ridicule_list
-        return config.render.my(data)
+        return config.render.my()
 
 
 app_my = web.application(urls, locals())

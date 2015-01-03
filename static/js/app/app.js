@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $(document).foundation();
     get_notice()
+    init();
 });
 function get_notice(){
     $.getJSON('/reminder/',function(data){
