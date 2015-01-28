@@ -1,7 +1,4 @@
 ### ridicule
-why would I do this ?
-
-of course I am tired of my company.
 
 in this community , we can ridicule our company safely.
 
